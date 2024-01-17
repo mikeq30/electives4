@@ -12,7 +12,7 @@ Data.replace(np.nan, 0, inplace= False)
 # change 0 value into Nan
 
 #! Support percentage
-frequent_itemsets= apriori(Data, min_support= 0.20, use_colnames= True)
+frequent_itemsets= apriori(Data, min_support= 0.10, use_colnames= True)
 print(frequent_itemsets)
 
 #! Confidence Threshold
