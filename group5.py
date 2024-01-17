@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from mlxtend.frequent_patterns import apriori,association_rules
+from mlxtend.frequent_patterns import apriori, association_rules
 from mlxtend.preprocessing import TransactionEncoder
 
 Data = pd.read_csv('restaurant_sales.csv', header= None)
