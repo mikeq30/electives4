@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 from mlxtend.frequent_patterns import apriori, association_rules
 from mlxtend.preprocessing import TransactionEncoder
 
-Data = pd.read_csv('restaurant_sales.csv', header= None)
+#Data = pd.read_csv('restaurant_sales.csv', header= None) #Use this if file is in D: or C/ path
+Data = pd.read_csv('D:\Codes\Python\Elective-4_4.1-PUP\electives4\\restaurant_sales.csv', header= None) #Lalaine Personal Path
+
 
 print(Data)
 Data.replace(np.nan, 0, inplace= False)
