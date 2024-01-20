@@ -6,26 +6,39 @@ from mlxtend.frequent_patterns import apriori, association_rules
 from mlxtend.preprocessing import TransactionEncoder
 
 #Data = pd.read_csv('restaurant_sales.csv', header= None) #Use this if file is in D: or C/ path
-Data = pd.read_csv('D:\Codes\Python\Elective-4_4.1-PUP\electives4\\restaurant_sales.csv', header= None) #Lalaine Personal Path
+DataFrame = pd.read_csv('localrest_ver2.csv')
+# Not Including the first two columns 
+DataFrame = DataFrame.iloc[:, 2:]
+DataFrame = DataFrame.map(lambda x: 1 if x != 0 else 0)
 
+print(DataFrame)
 
-print(Data)
-Data.replace(np.nan, 0, inplace= False)
-# change 0 value into Nan
+#Remove the warning of using DataFrame with non bool type
+DataFrame = DataFrame.astype(bool)
+    
+print("Enter minimum support in decimal (Example: .10)")
+support = float(input("Support: "))
 
-#! Support percentage
-frequent_itemsets= apriori(Data, min_support= 0.10, use_colnames= True)
-print(frequent_itemsets)
+print("Enter minimum lift in decimal (Example: .30)")
+liftnum = float(input("Lift: "))
 
-#! Confidence Threshold
-rules= association_rules(frequent_itemsets, metric='lift', min_threshold=0.50)
-print("\n\n", rules)
+try:
+    #! Support percentage
+    frequent_itemsets= apriori(DataFrame, min_support= support, use_colnames=True)
+    print(frequent_itemsets)
 
-##* A leverage value of 0 indicates independence. Range will be [-1 1]
-##* A high conviction value means that the consequent is highly depending on the antecedent and range [0 inf]
+    #! Confidence Threshold
+    rules= association_rules(frequent_itemsets, metric='lift', min_threshold=liftnum)
+    print("\n\n", rules)
 
-rules.sort_values('lift',ascending=False) # Sort Data
-print("\n\n", rules)
-print(type(rules))
+    ##* A leverage value of 0 indicates independence. Range will be [-1 1]
+    ##* A high conviction value means that the consequent is highly depending on the antecedent and range [0 inf]
 
-rules.to_csv("Apriori_Output.csv", index=False) # Get Output into CSV File
+    rules.sort_values('lift',ascending=False) # Sort Data
+    print("\n\n", rules)
+    print(type(rules))
+
+    rules.to_csv("Apriori_Output.csv", index=False) # Get Output into CSV File
+except: 
+    print("Theres no result with the given threshold")
+    exit
