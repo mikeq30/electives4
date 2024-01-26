@@ -29,7 +29,7 @@ try:
 
     #! Confidence Threshold
     rules= association_rules(frequent_itemsets, metric='lift', min_threshold=liftnum)
-    print("\n\n", rules)
+    # print("\n\n", rules)
 
     ##* A leverage value of 0 indicates independence. Range will be [-1 1]
     ##* A high conviction value means that the consequent is highly depending on the antecedent and range [0 inf]
